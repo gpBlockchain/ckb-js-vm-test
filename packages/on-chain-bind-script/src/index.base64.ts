@@ -24,12 +24,7 @@ function main() {
     let result1 = base64.encode(input1);
     console.assert(result1 === "", "should encode an empty ArrayBuffer to empty base64 string");
 
-    // should encode binary data with special characters
-    // let input2 = new TextEncoder().encode("\x00\xFF\x7F");
-    // console.log("should encode binary data with special characters:",JSON.stringify(input2));
-    // const result2 = base64.encode(input2.buffer);
-    // console.log(result2)
-    // console.assert(result2 === "AP9/", "should encode binary data with special characters");
+// Removed commented-out code for encoding binary data with special characters
 
     // should handle non-ASCII characters (UTF-8)
     const input3 = new TextEncoder().encode("こんにちは");
