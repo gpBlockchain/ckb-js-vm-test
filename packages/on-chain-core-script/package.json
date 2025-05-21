@@ -1,0 +1,41 @@
+{
+  "name": "ckb-js-vm-test",
+  "version": "0.1.0",
+  "description": "",
+  "author": "your name",
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://github.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com"
+  },
+
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "scripts": {
+    "start": "ckb-debugger --read-file dist/index.bc --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -r",
+    "build:bytes": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.bytes.ts --outfile=dist/index.bytes.js && ckb-debugger --read-file dist/index.bytes.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.bytes.bc",
+    "build:ckb": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.ckb.ts --outfile=dist/index.ckb.js && ckb-debugger --read-file dist/index.ckb.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.ckb.bc",
+    "build:hasher": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.hasher.ts --outfile=dist/index.hasher.js && ckb-debugger --read-file dist/index.hasher.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.hasher.bc",
+    "build:highLevel": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.highLevel.ts --outfile=dist/index.highLevel.js && ckb-debugger --read-file dist/index.highLevel.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.highLevel.bc",
+    "build:num": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.num.ts --outfile=dist/index.num.js && ckb-debugger --read-file dist/index.num.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.num.bc",
+    "build:num.bug": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.num.bug.ts --outfile=dist/index.num.bug.js && ckb-debugger --read-file dist/index.num.bug.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.num.bug.bc",
+    "build:molecule": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.molecule.ts --outfile=dist/index.molecule.js && ckb-debugger --read-file dist/index.molecule.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.molecule.bc",
+    "build:molecule.bug": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.molecule.bug.ts --outfile=dist/index.molecule.bug.js && ckb-debugger --read-file dist/index.molecule.bug.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.molecule.bug.bc",
+    "build":  "pnpm run build:bytes && pnpm run build:ckb && pnpm run build:hasher && pnpm run build:highLevel && pnpm run build:num && pnpm run build:num.bug && pnpm run build:molecule && pnpm run build:molecule.bug",
+    "format": "prettier --write .",
+    "clean": "rimraf dist/*"
+  },
+  "devDependencies": {
+    "ckb-testtool": "~1.0.0",
+    "esbuild": "~0.25.0"
+  },
+  "dependencies": {
+    "@ckb-js-std/bindings": "~1.0.0",
+    "@ckb-js-std/core": "~1.0.0",
+    "ckb-default-app": "link:"
+  }
+}

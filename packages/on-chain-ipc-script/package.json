@@ -1,0 +1,35 @@
+{
+  "name": "ckb-js-vm-test",
+  "version": "0.1.0",
+  "description": "",
+  "author": "your name",
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://github.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "scripts": {
+    "start": "ckb-debugger --read-file dist/index.bc --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -r",
+    "format": "prettier --write .",
+    "build:server": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/ipc.server.ts --outfile=dist/ipc.server.js && ckb-debugger --read-file dist/ipc.server.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/ipc.server.bc",
+    "build:client": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/ipc.client.ts --outfile=dist/ipc.client.js && ckb-debugger --read-file dist/ipc.client.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/ipc.client.bc",
+    "build": "pnpm run build:server && pnpm run build:client",
+    "clean": "rimraf dist/*"
+  },
+  "devDependencies": {
+    "ckb-testtool": "~1.0.0",
+    "esbuild": "~0.25.0"
+  },
+  "dependencies": {
+    "@ckb-js-std/bindings": "~1.0.0",
+    "@ckb-js-std/core": "~1.0.0",
+    "@ckb-js-std/ipc": "~1.0.0",
+    "ckb-default-app": "link:"
+  }
+}
