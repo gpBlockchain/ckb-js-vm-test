@@ -1,0 +1,46 @@
+{
+  "name": "ckb-js-vm-test",
+  "version": "0.1.0",
+  "description": "",
+  "author": "your name",
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://github.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com"
+  },
+
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "scripts": {
+    "start": "ckb-debugger --read-file dist/index.bc --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -r",
+    "build:func": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.func.ts --outfile=dist/index.func.js && ckb-debugger --read-file dist/index.func.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.func.bc",
+    "build:func.witness": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.func.witness.ts --outfile=dist/index.func.witness.js && ckb-debugger --read-file dist/index.func.witness.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.func.witness.bc",
+    "build:exec": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.exec.ts --outfile=dist/index.exec.js && ckb-debugger --read-file dist/index.exec.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.exec.bc",
+    "build:secp256k1": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.secp256k1.ts --outfile=dist/index.secp256k1.js && ckb-debugger --read-file dist/index.secp256k1.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.secp256k1.bc",
+    "build:schnorr": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.schnorr.ts --outfile=dist/index.schnorr.js && ckb-debugger --read-file dist/index.schnorr.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.schnorr.bc",
+    "build:spawn": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.spawn.ts --outfile=dist/index.spawn.js && ckb-debugger --read-file dist/index.spawn.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.spawn.bc",
+    "build:exit": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.exit.ts --outfile=dist/index.exit.js && ckb-debugger --read-file dist/index.exit.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.exit.bc",
+    "build:hash": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.hash.ts --outfile=dist/index.hash.js && ckb-debugger --read-file dist/index.hash.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.hash.bc",
+    "build:index": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.ts --outfile=dist/index.js && ckb-debugger --read-file dist/index.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.bc",
+    "build:js": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.js.ts --outfile=dist/index.js.js && ckb-debugger --read-file dist/index.js.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.js.bc",
+    "build:smt": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.smt.ts --outfile=dist/index.smt.js && ckb-debugger --read-file dist/index.smt.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.smt.bc",
+    "build:TextDecoder": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.TextDecoder.ts --outfile=dist/index.TextDecoder.js && ckb-debugger --read-file dist/index.TextDecoder.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.TextDecoder.bc",
+    "build:base64": "tsc --noEmit && esbuild --platform=neutral --minify --bundle --external:@ckb-js-std/bindings --target=es2022 src/index.base64.ts --outfile=dist/index.base64.js && ckb-debugger --read-file dist/index.base64.js --bin node_modules/ckb-testtool/src/unittest/defaultScript/ckb-js-vm -- -c dist/index.base64.bc",
+    "build":  "pnpm run build:index && pnpm run build:exit && pnpm run build:func && pnpm run build:exec && pnpm run build:spawn && pnpm run build:js && pnpm run build:hash && pnpm run build:smt && pnpm run build:TextDecoder && pnpm run build:base64 && pnpm run build:secp256k1 && pnpm run build:schnorr && pnpm run build:func.witness",
+    "format": "prettier --write .",
+    "clean": "rimraf dist/*"
+  },
+  "devDependencies": {
+    "ckb-testtool": "~1.0.0",
+    "esbuild": "~0.25.0"
+  },
+  "dependencies": {
+    "@ckb-js-std/bindings": "~1.0.0",
+    "@ckb-js-std/core": "~1.0.0",
+    "ckb-default-app": "link:"
+  }
+}
